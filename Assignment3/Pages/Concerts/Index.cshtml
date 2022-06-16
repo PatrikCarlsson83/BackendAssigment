@@ -1,0 +1,70 @@
+﻿@page
+@model Assignment3.Pages.Concerts.IndexModel
+@{
+    ViewData["Title"] = "Concerts";
+}
+
+<body onload="getLocation()">
+</body>
+
+<div class="content">
+    <h1 class="headers">Concerts</h1>
+
+    <div>
+        @if (!string.IsNullOrEmpty(Model.Message))
+        {
+            <label class="alert">@Model.Message</label>
+            <br />
+        }
+    </div>
+
+    <label>See what shows are in specific towns</label>
+
+    <form method="post" asp-page-handler="Town">
+        <select asp-for="SelectedCityID" asp-items="Model.Options"></select>
+        <button type="submit">Search</button>
+    </form>
+
+    <a class="artists-link" asp-page="/Concerts/Cities">Add city</a>
+    <a class="artists-link" asp-page="/Concerts/Add">Add concert</a>
+
+
+    <form method="post" asp-page-handler="Find">
+        <input hidden asp-for="City.Latitude" name="Latitude" id="Latitude" />
+        <input hidden asp-for="City.Longitude" name="Longitude" id="Longitude" />
+        <button type="submit">Find concerts close to your location</button>
+    </form>
+
+    <table>
+        @if (Model.NearbyConcerts != null)
+        {
+            foreach (var concert in Model.NearbyConcerts)
+            {
+
+                <tr>
+                    <td><a class="artists-link" asp-page="/Concerts/Edit" asp-route-id="@concert.ID">@concert.Date.ToShortDateString(), @concert.Name, @concert.City.Name</a></td>
+                </tr>
+            }
+        }
+    </table>
+    <a class="artists-link back" asp-page="../Index">Home</a>
+</div>
+
+<script>
+
+    var x = document.getElementById("Latitude");
+    var y = document.getElementById("Longitude");
+
+    function getLocation() {
+        navigator.geolocation.getCurrentPosition(showPosition);
+    }
+
+    function showPosition(position) {
+        x.value = position.coords.latitude;
+        y.value = position.coords.longitude;
+    }
+</script>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

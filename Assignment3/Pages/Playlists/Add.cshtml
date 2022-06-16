@@ -1,0 +1,38 @@
+﻿@page "{id}"
+@model Assignment3.Pages.Playlists.AddModel
+@{
+    ViewData["Title"] = "Playlists";
+}
+
+<div class="content">
+    <h1 class="headers">@ViewData["Title"]</h1>
+
+    <h2 class="headers">Create new playlist</h2>
+    <div>
+        <form method="post" asp-page-handler="Create">
+            <label asp-for="Playlist.Name"></label>
+            <input asp-for="Playlist.Name" />
+            <span asp-validation-for="Playlist.Name"></span>
+            <button type="submit">Add new playlist</button>
+        </form>
+    </div>
+
+    <table>
+        @foreach (var playlist in Model.Playlists)
+        {
+            <tr>
+                <td><a class="artists-link" asp-page="./Index" asp-route-id="@playlist.ID">@playlist.Name</a></td>
+                <td>
+                    <form method="post">
+                        <button id="add-to-list" type="submit" asp-route-songId="@Model.Song.ID" asp-route-id="@playlist.ID">Add to list</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </table>
+    <a class="artists-link back" asp-page="../Index">Home</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,71 @@
+﻿@page "{id}"
+@model Assignment3.Pages.Concerts.EditModel
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<div class="content">
+    <h1 class="headers">@ViewData["Title"]</h1>
+
+    <h2 class="headers">@Model.Concert.Name</h2>
+    <div>
+        <form method="Post" asp-page-handler="Going">
+
+            @if (Model.UserGoing != null)
+            {
+                <button>Going</button>
+            }
+            else
+            {
+                <button>Interested</button>
+            }
+
+        </form>
+    </div>
+
+    <div>
+        <table>
+            @foreach (var artist in Model.Artists)
+            {
+                <tr>
+                    <td><a class="artists-link" asp-page="/Artists/Index" asp-route-id="@artist.ID">@artist.Name</a></td>
+                    <td>
+                </tr>
+
+            }
+        </table>
+
+    </div>
+
+    <div>
+        <form method="post" asp-page-handler="Edit">
+            <h2 class="headers">Edit Concert</h2>
+            <label asp-for="Concert.Name"></label>
+            <input asp-for="Concert.Name">
+            <span asp-validation-for="Concert.Name"></span>
+
+            <label asp-for="Concert.Date"></label>
+            <input type="datetime" asp-for="Concert.Date" value="@Model.Concert.Date.ToShortDateString()">
+            <span asp-validation-for="Concert.Date"></span>
+
+            <label asp-for="SelectedArtist1ID">Change artists:</label>
+            <select asp-for="SelectedArtist1ID" asp-items="Model.ArtistOptions"><option>Choose Artist</option></select>
+            <select asp-for="SelectedArtist2ID" asp-items="Model.ArtistOptions"><option>Choose Artist</option></select>
+            <select asp-for="SelectedArtist3ID" asp-items="Model.ArtistOptions"><option>Choose Artist</option></select>
+
+            <button type="submit">Edit</button>
+        </form>
+    </div>
+
+    <div>
+        <form method="post" asp-page-handler="Delete">
+            <button type="submit">Delete Concert</button>
+        </form>
+    </div>
+
+    <a class="artists-link back" asp-page="./Index">Back</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

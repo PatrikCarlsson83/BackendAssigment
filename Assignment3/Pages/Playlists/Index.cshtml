@@ -1,0 +1,45 @@
+﻿@page "{id}"
+@model Assignment3.Pages.Playlists.IndexModel
+@{
+    ViewData["Title"] = "Playlists";
+}
+
+<div class="content">
+
+    <h2 class="headers">@ViewData["Title"]</h2>
+
+    @if (!string.IsNullOrEmpty(Model.Message))
+    {
+        <label class="alert">@Model.Message</label>
+        <br />
+    }
+    <form method="post" asp-page-handler="Edit">
+
+        <label asp-for="Playlist.Name"></label>
+        <input asp-for="Playlist.Name">
+        <span asp-validation-for="Playlist.Name"></span>
+
+        <button type="submit">Change Name</button>
+    </form>
+
+    <form method="post" asp-page-handler="Delete">
+        <button type="submit">Delete Playlist</button>
+    </form>
+
+    <table>
+        @foreach (var song in Model.Playlist.Songs)
+        {
+            <tr>
+                <td><label>@song.Title</label></td>
+                <td><a class="artists-link" asp-page="/Playlists/Delete" asp-route-id="@Model.Playlist.ID" asp-route-songId="@song.ID">❌</a></td>
+            </tr>
+        }
+    </table>
+
+    <a class="artists-link back" asp-page="../Index">Home</a>
+
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

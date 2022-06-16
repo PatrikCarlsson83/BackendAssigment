@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Find out where your favorite bands tour!">
+    <title>MusicDive</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="main.js" defer></script>
+</head>
+
+<body>
+
+    <template id="concert">
+
+        <li class="loaded-concert">
+            <label class="date"></label>
+            <label class="city"></label>
+            <label class="name"></label>
+            <label class="artist"></label>
+        </li>
+
+    </template>
+
+    <header>
+        <img id="logo" src="Logo.png" alt="Music Dive logo">
+    </header>
+    <main>
+        <form autocomplete="off">
+            <div class="search">
+                <input id="text-input" name="input" type="text" placeholder="Artist" autofocus>
+                <select name="cities" id="cities">
+                    <option>Everywhere</option>
+                </select>
+                <button id="submit">Search</button>
+            </div>
+        </form>
+        <ul>
+            <li class="header">
+                <label class="li-header">Date</label>
+                <label class="li-header">City</label>
+                <label class="li-header">Name</label>
+                <label class="li-header">Artists</label>
+            </li>
+        </ul>
+        <ul id="concert-list">
+            <!-- Templates list here-->
+        </ul>
+    </main>
+    <footer>
+        <p>Copyright Patrik & Ola</p>
+    </footer>
+
+</body>
+
+</html>

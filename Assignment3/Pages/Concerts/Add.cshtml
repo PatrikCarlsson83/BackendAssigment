@@ -1,0 +1,32 @@
+﻿@page
+@model Assignment3.Pages.Concerts.AddModel
+@{
+    ViewData["Title"] = "Add concert";
+}
+
+<div class="content">
+    <h2 class="headers">Add Concert</h2>
+
+    <form method="post">
+        <label asp-for="SelectedCityID">City:</label>
+        <select asp-for="SelectedCityID" asp-items="Model.CityOptions"></select>
+
+        <label asp-for="Concert.Name"></label>
+        <input asp-for="Concert.Name">
+        <span asp-validation-for="Concert.Name"></span>
+
+        <label asp-for="Concert.Date"></label>
+        <input type="datetime" asp-for="Concert.Date" placeholder="2023-10-24">
+        <span asp-validation-for="Concert.Date"></span>
+        <label asp-for="SelectedArtist1ID">Add artists:</label>
+        <select asp-for="SelectedArtist1ID" asp-items="Model.ArtistOptions"><option value="">Choose Artist</option></select>
+        <select asp-for="SelectedArtist2ID" asp-items="Model.ArtistOptions"><option value="">Choose Artist</option></select>
+        <select asp-for="SelectedArtist3ID" asp-items="Model.ArtistOptions"><option value="">Choose Artist</option></select>
+
+        <button type="submit">Add</button>
+
+    </form>
+    <a class="artists-link back" asp-page="/Concerts/Index">Back</a>
+
+</div>
+

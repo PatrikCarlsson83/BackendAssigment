@@ -1,0 +1,116 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    font-size: 1.2rem;
+    color: #204051;
+}
+
+body {
+    background-color: #E7DFD5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.search {
+    display: flex;
+    justify-content: center;
+    gap: 1%;
+    padding: 2rem;
+    background-color: #3B6978;
+    width: 100%;
+}
+
+form {
+    width: 100%;
+    border: solid #000 2px;
+}
+
+header {
+    display: flex;
+    justify-content: center;
+    width: 50%;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    background-color: #84A9AC;
+    justify-content: center;
+    width: 80%;
+}
+
+.loaded-concert {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    border-bottom: solid black 1px;
+}
+
+.header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    border-bottom: solid black 1px;
+}
+
+.li-header {
+    font-weight: Bold;
+    font-size: 1.2rem;
+}
+
+label {
+    width: 50%;
+    text-align: center;
+}
+
+#concert-list {
+    display: flex;
+    flex-direction: column;
+}
+
+#logo {
+    align-items: center;
+    width: 60%;
+    height: auto;
+}
+
+#text-input,
+#cities {
+    max-width: 100%;
+}
+
+.date {
+    display: inline;
+}
+
+footer {
+    padding: 0.5rem;
+    width: 80%;
+    background-color: #3B6978;
+}
+
+@media screen and (max-width: 58rem) {
+
+    * {
+        font-size: 1rem;
+    }
+}
+
+@media screen and (max-width: 35rem) {
+
+    .search {
+        display: inline-block;
+        background-color: #3B6978;
+    }
+
+    .loaded-concert {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .li-header {
+        display: none;
+    }
+}

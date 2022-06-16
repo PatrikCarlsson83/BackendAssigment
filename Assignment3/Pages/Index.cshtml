@@ -1,0 +1,45 @@
+﻿@page
+
+
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+@if (!string.IsNullOrEmpty(Model.Message))
+{
+    <label class="alert">@Model.Message</label>
+    <br />
+}
+
+@if (Model.DatabaseAny)
+{
+    <a class="populate" asp-page="./PopulateDatabase">Populate database</a>
+}
+
+<div class="home-container">
+    <div class="home">
+        <h1 class="headers">Your Artists</h1>
+        @foreach (var artist in Model.Artists)
+        {
+            <a class="artists-link" asp-page="/Artists/Edit" asp-route-id="@artist.Artist.ID">@artist.Artist.Name</a>
+        }
+    </div>
+
+    <div class="home">
+        <h1 class="headers">Playlists</h1>
+        @foreach (var playlist in Model.Playlists)
+        {
+            <a class="artists-link" asp-page="/Playlists/Index" asp-route-id="@playlist.ID">@playlist.Name</a>
+        }
+    </div>
+
+    <div class="home">
+        <h1 class="headers">Concerts</h1>
+        @foreach (var concert in Model.Concerts)
+        {
+            <a class="artists-link" asp-page="/Concerts/Edit" asp-route-id="@concert.Concert.ID">@concert.Concert.Name</a>
+        }
+    </div>
+</div>
+

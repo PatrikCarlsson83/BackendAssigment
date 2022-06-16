@@ -1,0 +1,91 @@
+﻿@page "{id}"
+@model Assignment3.Pages.Artists.EditModel
+@{
+    ViewData["Title"] = @Model.Artist.Name;
+}
+
+<div class="content">
+    <h1 class="headers">@ViewData["Title"]</h1>
+
+    <div>
+        <form method="post">
+
+            @if (Model.Liked != null)
+            {
+                <button>Dislike</button>
+            }
+            else
+            {
+                <button>Like</button>
+            }
+
+        </form>
+    </div>
+
+    <div>
+        <h2 class="headers">Add Album</h2>
+        <form method="post" asp-page-handler="Add">
+
+            <label asp-for="Album.Title"></label>
+            <input asp-for="Album.Title">
+            <span asp-validation-for="Album.Title"></span>
+
+            <button type="submit">Add</button>
+
+        </form>
+    </div>
+
+    <div>
+        <table>
+            @foreach (var album in Model.Albums)
+            {
+                <tr>
+                    <td><a class="artists-link" asp-page="/Albums/Index" asp-route-id="@album.ID">@album.Title</a></td>
+                    <td>
+                </tr>
+            }
+        </table>
+    </div>
+
+    <div>
+        <form method="post" asp-page-handler="Edit">
+            <h2 class="headers">Edit Artist</h2>
+            <label asp-for="Artist.Name"></label>
+            <input asp-for="Artist.Name">
+            <span asp-validation-for="Artist.Name"></span>
+            <button type="submit">Edit</button>
+        </form>
+    </div>
+
+    <form method="post" asp-page-handler="TourWith">
+        <button type="submit">Toured with</button>
+    </form>
+    <div>
+        <table>
+            @if (Model.Artists != null)
+            {
+                @foreach (var artist in Model.Artists)
+                {
+                    <tr>
+                        <td><a class="artists-link" asp-page="/Artists/Edit" asp-route-id="@artist.ID">@artist.Name</a></td>
+                        <td>
+                    </tr>
+                }
+            }
+        </table>
+    </div>
+
+    <div>
+        <form method="post" asp-page-handler="Delete">
+            <button type="submit">Delete Artist</button>
+        </form>
+    </div>
+
+    <a class="artists-link back" asp-page="/Artists/Index">Back</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
+

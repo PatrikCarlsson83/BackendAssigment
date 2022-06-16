@@ -1,0 +1,32 @@
+﻿@page
+
+@model Assignment3.Pages.Concerts.CitiesModel
+@{
+    ViewData["Title"] = "Cities";
+}
+
+<div class="content">
+    <h2 class="headers">Add City</h2>
+    <form method="post">
+
+        <label asp-for="City.Name"></label>
+        <input asp-for="City.Name">
+        <span asp-validation-for="City.Name"></span>
+
+        <label asp-for="City.Latitude"></label>
+        <input asp-for="City.Latitude">
+        <span asp-validation-for="City.Latitude"></span>
+
+        <label asp-for="City.Longitude"></label>
+        <input asp-for="City.Longitude">
+        <span asp-validation-for="City.Longitude"></span>
+
+        <button type="submit">Add</button>
+
+    </form>
+    <a class="artists-link back" asp-page="/Concerts/Index">Back</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

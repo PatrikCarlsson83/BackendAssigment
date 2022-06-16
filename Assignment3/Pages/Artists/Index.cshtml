@@ -1,0 +1,52 @@
+﻿@page
+
+@model Assignment3.Pages.Artists.IndexModel
+@{
+    ViewData["Title"] = "Artists";
+}
+
+<div class="content">
+    <h1 class="headers">@ViewData["Title"]</h1>
+
+    @if (!string.IsNullOrEmpty(Model.Message))
+    {
+        <label class="alert">@Model.Message</label>
+        <br />
+    }
+
+    <h2 class="headers">Add Artist</h2>
+    <div>
+        <form method="post">
+
+            <label asp-for="Artist.Name">Artist name: </label>
+            <input asp-for="Artist.Name" />
+            <span asp-validation-for="Artist.Name"></span>
+            <button type="submit">Add</button>
+        </form>
+
+        <table>
+            @foreach (var artist in Model.Artists)
+            {
+                <tr>
+                    <td><a class="artists-link" asp-page="./Edit" asp-route-id="@artist.ID">@artist.Name</a></td>
+                    <td>
+                        @foreach (var likedItem in Model.Liked)
+                        {
+                            @if (likedItem.Artist.ID == artist.ID && likedItem.User.Id == Model.UserID)
+                            {
+                                <label>👌</label>
+                            }
+                        }
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+
+    <a class="artists-link back" asp-page="../Index">Home</a>
+
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

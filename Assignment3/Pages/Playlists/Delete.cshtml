@@ -1,0 +1,18 @@
+﻿@page
+
+@model Assignment3.Pages.Playlists.DeleteModel
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<div class="content">
+    <h1 class="headers">@Model.Song.Title</h1>
+    <h2 class="headers">@Model.Playlist.Name</h2>
+
+    <form method="post">
+        <label>Are you sure you want to delete from playlist?</label>
+        <button type="submit" asp-route="id">Delete</button>
+    </form>
+
+    <a class="artist-link back" asp-page="/Playlists/Index" asp-route-id="@Model.Playlist.ID">Back</a>
+</div>

@@ -1,0 +1,28 @@
+﻿@page "{id}"
+@model Assignment3.Pages.Songs.IndexModel
+@{
+    ViewData["Title"] = "Songs";
+}
+
+<div class="content">
+    <h1 class="headers">@Model.Song.Title</h1>
+    <form method="post" asp-page-handler="Edit">
+
+        <label asp-for="Song.Title"></label>
+        <input asp-for="Song.Title">
+        <span asp-validation-for="Song.Title"></span>
+        <button type="submit">Edit</button>
+    </form>
+
+    <form method="post" asp-page-handler="Delete">
+        <button type="submit">Delete</button>
+    </form>
+
+    <a class="artists-link back" asp-page="../Index">Home</a>
+
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
